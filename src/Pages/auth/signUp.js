@@ -1,19 +1,16 @@
-import React, { useState, Route, Navigate } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { saveStorage } from "../../LocalStorage/localStorage";
-import Header from "../Header/Header";
+import React, { useState } from "react";
+import PhoneInput from "react-phone-number-input";
 import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
-import { composeSyncValidators } from "react-admin";
+import Header from "../../Components/Header/Header";
+import { useNavigate } from "react-router-dom";
 
-const SignInComponent = () => {
+const SignUp = () => {
 	const [error, setError] = useState(null);
 	const errorDiv = error ? (
 		<div className="error">
@@ -24,7 +21,7 @@ const SignInComponent = () => {
 		""
 	);
 
-	const [values, setValues] = React.useState({
+	const [values, setValues] = useState({
 		password: "",
 		showPassword: false,
 	});
@@ -50,15 +47,22 @@ const SignInComponent = () => {
 		}
 	};
 
-	const navigate = useNavigate();
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
+	const [location, setLocation] = useState("");
 	const [password, setPassword] = useState("");
+
+	const navigate = useNavigate();
 
 	const email_regex =
 		/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	var str;
-	function CollectData_login() {
+
+	function collectData() {
+		if (name === "") {
+			setError("Name is required");
+			return;
+		}
 		if (email === "") {
 			setError("Email is required");
 			return;
@@ -75,6 +79,10 @@ const SignInComponent = () => {
 			setError("Phone must be at least 11 characters");
 			return;
 		}
+		if (location === "") {
+			setError("Location is required");
+			return;
+		}
 		if (password === "") {
 			setError("Password is required");
 			return;
@@ -86,28 +94,32 @@ const SignInComponent = () => {
 		setError(null);
 
 		const data = {
+			userName: name,
 			email: email,
 			phoneNumber: phoneNumber,
+			location: location,
 			password: password,
 		};
 
 		console.log(data);
-		const response = axios.post("http://localhost:3010/signUp/login", data);
+		let response = axios.post(
+			"http://localhost:3010/signUp/register",
+			data
+		);
+
+		console.log(response);
 		response
 			.then((result) => {
-				console.log(result.data);
 				if (result.status === 200) {
+					console.log(result.data.message);
 					setError(result.data.message);
-					localStorage.setItem("token", result.data.token);
-					saveStorage("user", result.data);
 
-					navigate("/dash-board");
-					console.log(result.data);
+					navigate("/sign-in");
 				}
 			})
 			.catch((error) => {
-				console.log("error: ", error);
-				setError(error.response.data["msg"]);
+				console.log(error);
+				// setError(error.response.data);
 			});
 	}
 
@@ -116,28 +128,51 @@ const SignInComponent = () => {
 			<Header />
 			<div className="item-align">
 				<form>
-					{" "}
-					<h1>Log In</h1>
+					<h1>Register</h1>
 					<Input
-						className="inputbox"
+						value={name}
+						className="inputbox_1"
 						onKeyDown={handleEnter}
+						name="name"
 						type="text"
+						onChange={(e) => setName(e.target.value)}
+						placeholder="Enter Shop Name"
+					/>
+					<Input
 						value={email}
+						className="inputbox_1"
+						onKeyDown={handleEnter}
+						name="email"
+						type="email"
 						onChange={(e) => setEmail(e.target.value)}
 						placeholder="Enter Email"
 					/>
+
 					<Input
-						className="inputbox"
-						onKeyDown={handleEnter}
-						type="text"
 						value={phoneNumber}
+						className="inputbox_1"
+						onKeyDown={handleEnter}
+						type="phone"
+						id="phone"
+						name="phone"
+						pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 						onChange={(e) => setPhoneNumber(e.target.value)}
 						placeholder="Enter Phone Number"
 					/>
 					<Input
-						className="inputbox"
-						type={values.showPassword ? "text" : "password"}
+						value={location}
+						className="inputbox_1"
+						onKeyDown={handleEnter}
+						onChange={(e) => setLocation(e.target.value)}
+						placeholder="Enter Location"
+					/>
+
+					<Input
 						value={password}
+						className="inputbox_1"
+						onKeyDown={handleEnter}
+						name="password"
+						type={values.showPassword ? "text" : "password"}
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder="Enter Password"
 						endAdornment={
@@ -156,17 +191,12 @@ const SignInComponent = () => {
 						}
 					/>
 					{errorDiv}
-					<button
-						className="btn"
-						type="button"
-						onClick={CollectData_login}
-					>
-						Log In
+					<button className="btn" type="button" onClick={collectData}>
+						Sign Up
 					</button>
-					<ToastContainer />
 				</form>
 			</div>
 		</div>
 	);
 };
-export default SignInComponent;
+export default SignUp;
