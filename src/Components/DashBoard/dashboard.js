@@ -13,13 +13,19 @@ const Dashboard = () => {
 	const MAT_URL = "http://localhost:3010/static/";
 	const [products, setProducts] = useState([]);
 	const [shop, setShop] = useState({});
-	const navigate = useNavigate();
-
-	const user = loadStorage("user");
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+	var user = loadStorage("user");
+	const navigate = useNavigate();
+
 	useEffect(() => {
+		user = loadStorage("user");
+		if (!user) {
+			setIsLoading(false);
+			navigate("/sign-in");
+		}
 		axios({
 			method: "get",
 			url: "http://localhost:3010/medicine/getMedicineByShop",
@@ -34,9 +40,11 @@ const Dashboard = () => {
 					setProducts(result.data.result["medicine"]);
 					setShop(result.data.result["shop"]);
 				}
+				setIsLoading(false);
 			})
 			.catch((error) => {
 				console.log(error);
+				setIsLoading(false);
 				// setError(error.response.data);
 			});
 	}, [isPopupOpen]);
@@ -57,97 +65,114 @@ const Dashboard = () => {
 					</div>
 				)}
 
-				<div class="center_row">
-					<div className="per-info">
-						<div className="card-profile">
-							<div className="field_1">
-								<label style={{ margintop: "20px" }}>
-									Shop Name
-								</label>
-								<input
-									type="text"
-									className="input_n"
-									placeholder={user.userName}
-									readOnly={true}
-								/>
-							</div>
-							<div className="field">
-								<label>Email</label>
-								<input
-									type="text"
-									className="input_n"
-									placeholder={user.email}
-									readOnly={true}
-								/>
-							</div>
-
-							<div className="field">
-								<label>Phone Number</label>
-								<input
-									type="text"
-									className="input_n"
-									placeholder={user.phoneNumber}
-									readOnly={true}
-								/>
-							</div>
-							<br></br>
-
-							<button
-								className="button"
-								onClick={() => setIsPopupOpen(!isPopupOpen)}
-							>
-								Add Item
-							</button>
-							<button
-								className="button"
-								onClick={() => {
-									delStorage("user");
-									navigate("/sign-in");
-								}}
-							>
-								Log Out
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div className="product_sec">
-					<div className="title">My Items</div>
-					<div className="items">
-						{products.map((item, key) => {
-							return (
-								<div key={key} className="medicine_card">
-									<div>
-										<div className="card-img">
-											<img
-												className="img_sty"
-												src={MAT_URL + item.image}
-												// width="30"
-												// height="30"
-											/>
-										</div>
-										<div>
-											<div className="medicine-details">
-												<h3>{item.medName}</h3>
-												<p>{item.price} BDT</p>
-												<p>{item.specification}</p>
-											</div>
-											<div className="medicine-details-1">
-												<span>
-													Shop name : {shop.userName}
-												</span>
-
-												<span>
-													Location :{shop.location}
-												</span>
-											</div>
-										</div>
+				{isLoading ? (
+					<h1>Loading</h1>
+				) : (
+					<>
+						<div class="center_row">
+							<div className="per-info">
+								<div className="card-profile">
+									<div className="field_1">
+										<label style={{ margintop: "20px" }}>
+											Shop Name
+										</label>
+										<input
+											type="text"
+											className="input_n"
+											placeholder={user.userName}
+											readOnly={true}
+										/>
 									</div>
+									<div className="field">
+										<label>Email</label>
+										<input
+											type="text"
+											className="input_n"
+											placeholder={user.email}
+											readOnly={true}
+										/>
+									</div>
+
+									<div className="field">
+										<label>Phone Number</label>
+										<input
+											type="text"
+											className="input_n"
+											placeholder={user.phoneNumber}
+											readOnly={true}
+										/>
+									</div>
+									<br></br>
+
+									<button
+										className="button"
+										onClick={() =>
+											setIsPopupOpen(!isPopupOpen)
+										}
+									>
+										Add Item
+									</button>
+									<button
+										className="button"
+										onClick={() => {
+											delStorage("user");
+											navigate("/sign-in");
+										}}
+									>
+										Log Out
+									</button>
 								</div>
-							);
-						})}
-					</div>
-				</div>
+							</div>
+						</div>
+
+						<div className="product_sec">
+							<div className="title">My Items</div>
+							<div className="items">
+								{products.map((item, key) => {
+									return (
+										<div
+											key={key}
+											className="medicine_card"
+										>
+											<div>
+												<div className="card-img">
+													<img
+														className="img_sty"
+														src={
+															MAT_URL + item.image
+														}
+														// width="30"
+														// height="30"
+													/>
+												</div>
+												<div>
+													<div className="medicine-details">
+														<h3>{item.medName}</h3>
+														<p>{item.price} BDT</p>
+														<p>
+															{item.specification}
+														</p>
+													</div>
+													<div className="medicine-details-1">
+														<span>
+															Shop name :{" "}
+															{shop.userName}
+														</span>
+
+														<span>
+															Location :
+															{shop.location}
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+					</>
+				)}
 			</>
 		</>
 	);

@@ -5,13 +5,9 @@ import "../../Styles/index.css";
 
 const Header = () => {
 	var user = loadStorage("user");
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		user = loadStorage("user");
-		if (user) {
-			navigate("/dash-board");
-		}
 	}, []);
 
 	return (

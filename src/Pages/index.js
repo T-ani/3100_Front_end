@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import styled from "styled-components";
 
 import "../Styles/medicineCard.css";
 import axios from "axios";
 import MedicineCard from "../Components/MedicineCard";
+import { loadStorage } from "../LocalStorage/localStorage";
+import { useNavigate } from "react-router-dom";
 
-const Update = () => {
+const Index = () => {
 	const [searchText, setSearchText] = useState("");
-	const [products, setProducts] = useState(null);
+	const [products, setProducts] = useState([]);
 	const [shop, setShop] = useState(null);
 
 	const handleSearch = () => {
-		setProducts(null);
+		setProducts([]);
 		console.log(searchText);
 
 		const data = {
@@ -44,7 +46,7 @@ const Update = () => {
 				<Button onClick={handleSearch}>Search</Button>
 			</Row>
 			<Grid>
-				{products ? (
+				{products.length > 0 ? (
 					products.map((item, key) => {
 						return (
 							<>
@@ -105,4 +107,4 @@ const Button = styled.button`
 	font-weight: bold;
 `;
 
-export default Update;
+export default Index;
