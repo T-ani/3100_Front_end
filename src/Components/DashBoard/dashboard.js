@@ -96,7 +96,7 @@ const Dashboard = () => {
 								className="button"
 								onClick={() => setIsPopupOpen(!isPopupOpen)}
 							>
-								Add Item{" "}
+								Add Item
 							</button>
 							<button
 								className="button"

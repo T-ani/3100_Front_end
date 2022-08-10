@@ -9,8 +9,8 @@ const Header = () => {
 
 	useEffect(() => {
 		user = loadStorage("user");
-		if (!user) {
-			navigate("/");
+		if (user) {
+			navigate("/dash-board");
 		}
 	}, []);
 
@@ -22,18 +22,26 @@ const Header = () => {
 						Home
 					</Link>
 				</li>
-				<li>
-					<Link to="/sign-up" style={{ textDecoration: "none" }}>
-						Sign Up
-					</Link>
-				</li>
 
 				{!user ? (
-					<li>
-						<Link to="/sign-in" style={{ textDecoration: "none" }}>
-							Log In
-						</Link>
-					</li>
+					<>
+						<li>
+							<Link
+								to="/sign-up"
+								style={{ textDecoration: "none" }}
+							>
+								Sign Up
+							</Link>
+						</li>
+						<li>
+							<Link
+								to="/sign-in"
+								style={{ textDecoration: "none" }}
+							>
+								Log In
+							</Link>
+						</li>
+					</>
 				) : (
 					<li>
 						<Link
