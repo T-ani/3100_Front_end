@@ -12,6 +12,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
 import { composeSyncValidators } from "react-admin";
+import "../../Styles/signIn.scss";
 
 const SignInComponent = () => {
 	const [error, setError] = useState(null);
@@ -92,7 +93,7 @@ const SignInComponent = () => {
 		};
 
 		console.log(data);
-		const response = axios.post("http://localhost:3010/signUp/login", data);
+		const response = axios.post("http://localhost:3010/auth/login", data);
 		response
 			.then((result) => {
 				console.log(result.data);
@@ -113,60 +114,50 @@ const SignInComponent = () => {
 
 	return (
 		<div>
+			<div className="main_page"> 
 			<Header />
-			<div className="item-align">
-				<form>
+			<div className="sign_in_form">
+				<div className="form-signin-card">
 					{" "}
-					<h1>Log In</h1>
-					<Input
-						className="inputbox"
+					<h2>Log In</h2>
+					<input
+						
 						onKeyDown={handleEnter}
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						placeholder="Enter Email"
 					/>
-					<Input
-						className="inputbox"
+					<input
+						
 						onKeyDown={handleEnter}
 						type="text"
 						value={phoneNumber}
 						onChange={(e) => setPhoneNumber(e.target.value)}
 						placeholder="Enter Phone Number"
 					/>
-					<Input
-						className="inputbox"
+					<input
+						
 						type={values.showPassword ? "text" : "password"}
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder="Enter Password"
-						endAdornment={
-							<InputAdornment position="end">
-								<IconButton
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-								>
-									{values.showPassword ? (
-										<Visibility />
-									) : (
-										<VisibilityOff />
-									)}
-								</IconButton>
-							</InputAdornment>
-						}
+			
+							
 					/>
 					{errorDiv}
 					<button
-						className="btn"
-						type="button"
+						
 						onClick={CollectData_login}
 					>
 						Log In
 					</button>
 					<ToastContainer />
-				</form>
+				</div>
 			</div>
-		</div>
+
+			</div>
+					</div>
 	);
 };
 export default SignInComponent;

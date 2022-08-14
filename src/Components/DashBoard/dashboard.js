@@ -6,8 +6,13 @@ import Home from "../../Pages";
 import Add_Item from "../../Pages/add_item";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
+import "./../../Styles/dashboard_new.scss";
 import "./../../Styles/dashBoard.css";
+
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import axios from "axios";
+import { red } from "@material-ui/core/colors";
 
 const Dashboard = () => {
 	const MAT_URL = "http://localhost:3010/static/";
@@ -35,11 +40,9 @@ const Dashboard = () => {
 			},
 		})
 			.then((result) => {
-				if (result.status === 200) {
-					console.log(result.data);
-					setProducts(result.data.result["medicine"]);
-					setShop(result.data.result["shop"]);
-				}
+				console.log(result.data);
+				setProducts(result.data.result["medicine"]);
+				setShop(result.data.result["shop"]);
 				setIsLoading(false);
 			})
 			.catch((error) => {
@@ -50,82 +53,49 @@ const Dashboard = () => {
 	}, [isPopupOpen]);
 
 	return (
-		<>
+		<div>
 			<Header />
-
-			<>
-				{isPopupOpen && (
-					<div class="popup">
-						<div className="upload">
-							<Add_Item
-								isPopupOpen={isPopupOpen}
-								setIsPopupOpen={setIsPopupOpen}
-							/>
-						</div>
-					</div>
-				)}
-
-				{isLoading ? (
-					<h1>Loading</h1>
-				) : (
-					<>
-						<div class="center_row">
-							<div className="per-info">
-								<div className="card-profile">
-									<div className="field_1">
-										<label style={{ margintop: "20px" }}>
-											Shop Name
-										</label>
-										<input
-											type="text"
-											className="input_n"
-											placeholder={user.userName}
-											readOnly={true}
-										/>
+			{
+				isLoading ? (<div><h1>Loading...</h1></div>) : (<div className='main_page'>
+					<div className='dashboard_body'>
+						<div className='profile-info'>
+							<div className='information'>
+								{isPopupOpen && (
+									<div class="popup">
+										<div className="upload">
+											<Add_Item
+												isPopupOpen={isPopupOpen}
+												setIsPopupOpen={setIsPopupOpen}
+											/>
+										</div>
 									</div>
-									<div className="field">
-										<label>Email</label>
-										<input
-											type="text"
-											className="input_n"
-											placeholder={user.email}
-											readOnly={true}
-										/>
+								)}
+								<h2>Shop Name : {user.userName}</h2>
+								<p> Email : {user.email}</p>
+								<text> Content No: {user.phoneNumber}</text>
+								<text> Location : {user.location}</text>
+								<div className='cutomized-button'>
+
+									<div className='button_1'>
+										<button onClick={() => setIsPopupOpen(!isPopupOpen)}><PostAddIcon /></button>
+										<label>Add Medicine</label>
 									</div>
 
-									<div className="field">
-										<label>Phone Number</label>
-										<input
-											type="text"
-											className="input_n"
-											placeholder={user.phoneNumber}
-											readOnly={true}
-										/>
-									</div>
-									<br></br>
-
-									<button
-										className="button"
-										onClick={() =>
-											setIsPopupOpen(!isPopupOpen)
-										}
-									>
-										Add Item
-									</button>
-									<button
-										className="button"
-										onClick={() => {
+									<div className='button_1'>
+										<button onClick={() => {
 											delStorage("user");
 											navigate("/sign-in");
-										}}
-									>
-										Log Out
-									</button>
+										}}><PowerSettingsNewIcon /></button>
+										<label>Log Out</label></div>
+
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<div className="product_sec">
+					
+
+  <div className="product_sec">
 							<div className="title">My Items</div>
 							<div className="items">
 								{products.map((item, key) => {
@@ -170,11 +140,14 @@ const Dashboard = () => {
 									);
 								})}
 							</div>
-						</div>
-					</>
-				)}
-			</>
-		</>
+						</div>	
+				</div>)
+			}
+
+
+
+
+		</div>
 	);
 };
 export default Dashboard;

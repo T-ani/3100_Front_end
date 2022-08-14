@@ -9,6 +9,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
 import Header from "../../Components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import "../../Styles/signIn.scss";
 
 const SignUp = () => {
 	const [error, setError] = useState(null);
@@ -103,7 +104,7 @@ const SignUp = () => {
 
 		console.log(data);
 		let response = axios.post(
-			"http://localhost:3010/signUp/register",
+			"http://localhost:3010/auth/signup",
 			data
 		);
 
@@ -119,28 +120,33 @@ const SignUp = () => {
 			})
 			.catch((error) => {
 				console.log(error);
-				// setError(error.response.data);
+				setError(error.response.data);
 			});
 	}
 
 	return (
 		<div>
 			<Header />
-			<div className="item-align">
-				<form>
-					<h1>Register</h1>
-					<Input
+			<div className="main_page">
+				<div className="sign_in_form">
+
+					<div className="form-signin-card">
+
+					
+				
+					<h2>Register</h2>
+					<input
 						value={name}
-						className="inputbox_1"
+						
 						onKeyDown={handleEnter}
 						name="name"
 						type="text"
 						onChange={(e) => setName(e.target.value)}
 						placeholder="Enter Shop Name"
 					/>
-					<Input
+					<input
 						value={email}
-						className="inputbox_1"
+						
 						onKeyDown={handleEnter}
 						name="email"
 						type="email"
@@ -148,9 +154,9 @@ const SignUp = () => {
 						placeholder="Enter Email"
 					/>
 
-					<Input
+					<input
 						value={phoneNumber}
-						className="inputbox_1"
+						
 						onKeyDown={handleEnter}
 						type="phone"
 						id="phone"
@@ -159,42 +165,30 @@ const SignUp = () => {
 						onChange={(e) => setPhoneNumber(e.target.value)}
 						placeholder="Enter Phone Number"
 					/>
-					<Input
+					<input
 						value={location}
-						className="inputbox_1"
+					
 						onKeyDown={handleEnter}
 						onChange={(e) => setLocation(e.target.value)}
 						placeholder="Enter Location"
 					/>
 
-					<Input
+					<input
 						value={password}
-						className="inputbox_1"
+						
 						onKeyDown={handleEnter}
 						name="password"
 						type={values.showPassword ? "text" : "password"}
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder="Enter Password"
-						endAdornment={
-							<InputAdornment position="end">
-								<IconButton
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-								>
-									{values.showPassword ? (
-										<Visibility />
-									) : (
-										<VisibilityOff />
-									)}
-								</IconButton>
-							</InputAdornment>
-						}
-					/>
+						
+				/>
 					{errorDiv}
-					<button className="btn" type="button" onClick={collectData}>
+					<button  onClick={collectData}>
 						Sign Up
 					</button>
-				</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

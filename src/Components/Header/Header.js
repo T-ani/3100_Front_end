@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loadStorage } from "../../LocalStorage/localStorage";
 import "../../Styles/index.css";
+import "../../Styles/navbar.scss";
 
 const Header = () => {
 	var user = loadStorage("user");
@@ -11,46 +12,46 @@ const Header = () => {
 	}, []);
 
 	return (
-		<div>
-			<ul className="Header-ui">
-				<li>
+		<div className="navbar">
+			<div className="link">
+				<a>
 					<Link to="/" style={{ textDecoration: "none" }}>
 						Home
 					</Link>
-				</li>
+				</a>
 
 				{!user ? (
 					<>
-						<li>
+						<a>
 							<Link
 								to="/sign-up"
 								style={{ textDecoration: "none" }}
 							>
 								Sign Up
 							</Link>
-						</li>
-						<li>
+						</a>
+						<a>
 							<Link
 								to="/sign-in"
 								style={{ textDecoration: "none" }}
 							>
 								Log In
 							</Link>
-						</li>
+						</a>
 					</>
 				) : (
-					<li>
+					<a>
 						<Link
 							to="/dash-board"
 							style={{ textDecoration: "none" }}
 						>
 							Dashboard
 						</Link>
-					</li>
+					</a>
 				)}
 
 				<div></div>
-			</ul>
+			</div>
 		</div>
 	);
 };

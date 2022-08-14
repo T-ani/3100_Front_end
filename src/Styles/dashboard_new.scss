@@ -1,0 +1,226 @@
+@import "../Styles/variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@300&family=Roboto:wght@500&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+    
+}
+
+@mixin button {
+    width: 60%;
+    height: 35px;
+    background: black;
+    color: white;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+}
+
+.dashboard_body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+
+    // height: 88%;
+    background: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+    .profile-info {
+        width: 100%;
+        height: 50%;
+        background: red;
+
+        .information {
+            width: 100%;
+            height: 450px;
+            background: $custom-green;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .popup {
+                padding: 1.5rem;
+                height: 80%;
+                width: 40%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                z-index: 9999;
+                color: $custom-black;
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+
+                .form_add_item {
+                    height: 100%;
+                    color: $custom-black;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .image {
+                        display: flex;
+
+                        input {
+                            background: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                    }
+
+                    .button_popup {
+                        display: flex;
+                        width: 70%;
+                        justify-content: space-around;
+
+                        button {
+                            width: 40%;
+                            height: 40px;
+                            margin-top: 10px;
+                            border-radius: 5px;
+                        }
+
+                        button:hover {
+                            background: $custom-green;
+                            color: white;
+                            border: none;
+                        }
+
+                        .button_danger {
+                            background: red;
+                            color: white;
+                            border: none;
+
+                            button:hover {
+                                background-color: red;
+                                color: whi;
+                            }
+                        }
+                    }
+
+                    input {
+                        background: rgb(222, 221, 221);
+                        margin: 10px;
+                        display: block;
+                        width: 60%;
+                        height: 40px;
+                        border-radius: 4px;
+                        border: none;
+                        padding-left: 20px;
+                        outline: none;
+                        color: black;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                    }
+
+                }
+
+                button {
+                    height: 30%;
+                    background: $custom-black;
+                    color: wheat;
+                }
+
+            }
+
+            h2 {
+                font-weight: bold;
+            }
+
+            p {
+                font-weight: bold;
+            }
+
+            text {
+                font-weight: bold;
+            }
+
+            .cutomized-button {
+                width: 100%;
+                height: 100px;
+                margin-top: 3%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .button_1 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    margin-bottom: 10px;
+                    margin-top: 10px;
+
+                    label {
+                        margin-top: 10px;
+                        visibility: hidden;
+                    }
+                }
+
+                button {
+                    height: 80px;
+                    width: 80px;
+                    border-radius: 50%;
+                    margin-left: 50px;
+                    margin-right: 50px;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    background: $custom-black;
+                    color: white;
+                    transition: 0.3s;
+
+                }
+
+                button:hover {
+                    background: white;
+                    color: $custom-black;
+                    font-weight: bold;
+
+                }
+
+                .button_1:hover {
+                    label {
+                        visibility: visible;
+                    }
+                }
+
+            }
+
+        }
+
+
+    }
+    .products{
+        margin-top: 100px;
+    }
+
+
+}
