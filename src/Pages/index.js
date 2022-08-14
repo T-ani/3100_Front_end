@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import styled from "styled-components";
 import "../Styles/cardDesign.scss";
+import "../Styles/cardDesignHome.scss";
 import axios from "axios";
 import MedicineCard from "../Components/MedicineCard";
 import { loadStorage } from "../LocalStorage/localStorage";
@@ -50,27 +51,27 @@ const Index = () => {
 
 			{products.length > 0 ? (
 				
-			<div className="product_sec">
-				<div className="title-1">
+			<div className="product_sec-home">
+				<div className="title-1-home">
 					<h1> Our Products</h1></div>
-				<div className="items">
+				<div className="items-home">
 					{products.map((item, key) => {
 						return (
 							<div
 								key={key}
-								className="card"
+								className="card-home"
 							>
 								<img
-									className="image-style"
+									className="image-style-home"
 									src={
 										MAT_URL + item.image
 									}
 								/>
-								<div className="product-info">
+								<div className="product-info-home">
 									<h2>{item.medName}</h2>
 									<p>{item.price} BDT</p>
 								</div>
-								<div className="shop-info">
+								<div className="shop-info-home">
 
 									<p> {shop.userName}</p>
 									<p>  {shop.location}</p>
@@ -81,7 +82,7 @@ const Index = () => {
 				</div>
 			</div>
 			): (
-	<div className="title-2">
+	<div className="title-2-home">
 		<h1>Your searched items will be appeared here</h1>
 	</div>
 )}

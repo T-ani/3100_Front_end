@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../Styles/profile.css";
+
+import "../Styles/additem.scss";
+
 
 const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 	const [medName, setMedname] = useState("");
@@ -75,11 +77,11 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 	};
 
 	return (
-		<div className="form_add_item">
-			<form>
+		<div >
+			<form className="form-add-item">
 				<h1>Upload a Medicine</h1>
 				<input
-					className="inputbox"
+					
 					placeholder="Medicine-Name"
 					onKeyDown={handleEnter}
 					value={medName}
@@ -87,7 +89,7 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 				></input>
 
 				<input
-					className="inputbox"
+				
 					placeholder="Company"
 					value={company}
 					onChange={(e) => setCompany(e.target.value)}
@@ -95,7 +97,7 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 				></input>
 
 				<input
-					className="inputbox"
+					
 					value={specification}
 					onChange={(e) => setSpecification(e.target.value)}
 					placeholder="Specification"
@@ -103,33 +105,35 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 				></input>
 
 				<input
-					className="inputbox"
+					
 					placeholder="Price"
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
 					onKeyDown={handleEnter}
 				></input>
 
-				<div className="pic">
+				<div className="image">
 					<img src={imageURL} alt="" width="80" height="80" />
 					<input
 						type="file"
 						onChange={onImageChange}
-						className="pic_u"
+						
 					/>
 				</div>
 				{error && <div className="error">{error}</div>}
-				<button className="btn" onClick={(e) => handleSave(e)}>
+
+				<div className="button_popup" onClick={(e) => handleSave(e)}><button >
 					Save
 				</button>
 				<button
-					className="btn danger"
+					className="button_danger"
 					onClick={() => {
 						setIsPopupOpen(!isPopupOpen);
 					}}
 				>
 					Cancel
-				</button>
+				</button></div>
+				
 			</form>
 		</div>
 	);

@@ -7,8 +7,10 @@ import Add_Item from "../../Pages/add_item";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "./../../Styles/dashboard_new.scss";
-import "./../../Styles/dashBoard.css";
+
 import "./../../Styles/cardDesign.scss";
+import "./../../Styles/signIn.scss";
+
 
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
@@ -57,7 +59,8 @@ const Dashboard = () => {
 		<div>
 			<Header />
 			{
-				isLoading ? (<div><h1>Loading...</h1></div>) : (<div className='main_page'>
+				isLoading ? (<div><h1>Loading...</h1></div>) : 
+				(<div className='main_page'>
 					<div className='dashboard_body'>
 						<div className='profile-info'>
 							<div className='information'>
