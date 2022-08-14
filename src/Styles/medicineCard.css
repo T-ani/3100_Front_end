@@ -31,7 +31,7 @@
 }
 .img_sty
 {
-   width: 200px;
+   width: auto;
    height: 200px;
    margin: 20px;
    justify-self: right;

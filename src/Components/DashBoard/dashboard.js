@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "./../../Styles/dashboard_new.scss";
 import "./../../Styles/dashBoard.css";
+import "./../../Styles/cardDesign.scss";
 
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
@@ -93,54 +94,38 @@ const Dashboard = () => {
 						</div>
 					</div>
 
-					
 
-  <div className="product_sec">
-							<div className="title">My Items</div>
-							<div className="items">
-								{products.map((item, key) => {
-									return (
-										<div
-											key={key}
-											className="medicine_card"
-										>
-											<div>
-												<div className="card-img">
-													<img
-														className="img_sty"
-														src={
-															MAT_URL + item.image
-														}
-														// width="30"
-														// height="30"
-													/>
-												</div>
-												<div>
-													<div className="medicine-details">
-														<h3>{item.medName}</h3>
-														<p>{item.price} BDT</p>
-														<p>
-															{item.specification}
-														</p>
-													</div>
-													<div className="medicine-details-1">
-														<span>
-															Shop name :{" "}
-															{shop.userName}
-														</span>
 
-														<span>
-															Location :
-															{shop.location}
-														</span>
-													</div>
-												</div>
-											</div>
+					<div className="product_sec">
+						<div className="title-1">
+							<h1> Our Products</h1></div>
+						<div className="items">
+							{products.map((item, key) => {
+								return (
+									<div
+										key={key}
+										className="card"
+									>
+										<img
+											className="image-style"
+											src={
+												MAT_URL + item.image
+											}							
+										/>
+										<div className="product-info">
+											<h2>{item.medName}</h2>
+											<p>{item.price} BDT</p>
 										</div>
-									);
-								})}
-							</div>
-						</div>	
+										<div className="shop-info">
+
+											<p> {shop.userName}</p>
+											<p>  {shop.location}</p>
+										</div>
+									</div>
+								);
+							})}
+						</div>
+					</div>
 				</div>)
 			}
 
