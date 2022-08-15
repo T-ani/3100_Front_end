@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-import "../Styles/additem.scss";
+import "../../Styles/additem.scss";
 
-
-const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
+const Add_Item = ({ isPopupOpen, setIsPopupOpen, toast }) => {
 	const [medName, setMedname] = useState("");
 	const [company, setCompany] = useState("");
 	const [specification, setSpecification] = useState("");
 	const [price, setPrice] = useState("");
 	const [image, setImage] = useState();
 	const [imageURL, setImageURL] = useState("");
-	const navigate = useNavigate();
 	const [error, setError] = useState(null);
 
 	const axios = require("axios");
@@ -25,11 +22,9 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 			price === "" ||
 			imageURL === ""
 		) {
-			setError("Please fill all the fields");
+			toast.error("Please fill all the fields");
 			return;
 		}
-
-		setError(null);
 
 		const config = {
 			headers: {
@@ -54,12 +49,13 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 			.then((result) => {
 				if (result.status === 200) {
 					console.log(result.data.message);
-					setError(result.data.message);
+					toast.success(result.data.message);
+					setIsPopupOpen(false);
 				}
 			})
 			.catch((error) => {
 				console.log(error);
-				// setError(error.response.data);
+				toast.error(error.response.data.message);
 			});
 	}
 
@@ -78,11 +74,10 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 	};
 
 	return (
-		<div >
+		<div>
 			<form className="form-add-item">
 				<h1>Upload a Medicine</h1>
 				<input
-					
 					placeholder="Medicine-Name"
 					onKeyDown={handleEnter}
 					value={medName}
@@ -90,7 +85,6 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 				></input>
 
 				<input
-				
 					placeholder="Company"
 					value={company}
 					onChange={(e) => setCompany(e.target.value)}
@@ -98,7 +92,6 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 				></input>
 
 				<input
-					
 					value={specification}
 					onChange={(e) => setSpecification(e.target.value)}
 					placeholder="Specification"
@@ -106,7 +99,6 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 				></input>
 
 				<input
-					
 					placeholder="Price"
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
@@ -115,26 +107,21 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 
 				<div className="image">
 					<img src={imageURL} alt="" width="80" height="80" />
-					<input
-						type="file"
-						onChange={onImageChange}
-						
-					/>
+					<input type="file" onChange={onImageChange} />
 				</div>
 				{error && <div className="error">{error}</div>}
 
-				<div className="button_popup" ><button onClick={(e) => handleSave(e)} >
-					Save
-				</button>
-				<button
-					className="button_danger"
-					onClick={() => {
-						setIsPopupOpen(!isPopupOpen);
-					}}
-				>
-					Cancel
-				</button></div>
-				
+				<div className="button_popup">
+					<button onClick={(e) => handleSave(e)}>Save</button>
+					<button
+						className="button_danger"
+						onClick={() => {
+							setIsPopupOpen(!isPopupOpen);
+						}}
+					>
+						Cancel
+					</button>
+				</div>
 			</form>
 		</div>
 	);

@@ -1,13 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
-import Home from "./Components/DashBoard/home";
 import "./Styles/index.css";
-import DashBoard from "./Components/DashBoard/dashboard";
-import Search from "./Pages/search";
-import SignUp from "./Pages/auth/signUp";
-import SignIn from "./Pages/auth/signIn";
-import Index from "./Pages/index";
+import DashBoard from "./Pages/dashboard/DashboardPage";
+import Search from "./Pages/search/SearchPage";
+import SignUp from "./Pages/auth/SignUpPage";
+import SignIn from "./Pages/auth/SignInPage";
+import Index from "./Pages/index/IndexPage";
 
 function App() {
 	return (
