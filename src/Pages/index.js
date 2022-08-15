@@ -53,7 +53,7 @@ const Index = () => {
 				
 			<div className="product_sec-home">
 				<div className="title-1-home">
-					<h1> Our Products</h1></div>
+					<h1>Searched Items</h1></div>
 				<div className="items-home">
 					{products.map((item, key) => {
 						return (

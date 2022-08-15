@@ -4,13 +4,18 @@
 
 .card{
   
-    margin: 25px;
-    width: 85%;
+    margin-bottom: 8%;
+    margin-top: 8%;
+    width: 89%;
     display: inline-block;
    
     justify-content: space-around;
     background-color:$custom-light-green-3;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    
+    
+    align-self: center;
+    justify-self: center;
     .card__header {
         position: relative;
         display: flex;
@@ -44,9 +49,10 @@
 
 
     .items {
+   width: 80%;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	
+	grid-template-columns: repeat(4, 1fr) ;
+    grid-gap: 10px;
    
    
 }

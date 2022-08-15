@@ -22,7 +22,8 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 			medName === "" ||
 			company === "" ||
 			specification === "" ||
-			price === ""
+			price === "" ||
+			imageURL === ""
 		) {
 			setError("Please fill all the fields");
 			return;
@@ -122,7 +123,7 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen }) => {
 				</div>
 				{error && <div className="error">{error}</div>}
 
-				<div className="button_popup" onClick={(e) => handleSave(e)}><button >
+				<div className="button_popup" ><button onClick={(e) => handleSave(e)} >
 					Save
 				</button>
 				<button
