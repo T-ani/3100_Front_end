@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import "../../Styles/additem.scss";
+import { loadStorage } from "../../utils/localStorage";
 
 const Add_Item = ({ isPopupOpen, setIsPopupOpen, toast }) => {
 	const [medName, setMedname] = useState("");
@@ -28,7 +29,7 @@ const Add_Item = ({ isPopupOpen, setIsPopupOpen, toast }) => {
 
 		const config = {
 			headers: {
-				token: localStorage.getItem("token"),
+				token: loadStorage("token"),
 				"Content-Type": "multipart/form-data",
 			},
 		};
