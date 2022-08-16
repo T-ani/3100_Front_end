@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { loadStorage } from "../../utils/localStorage";
 import "../../Styles/index.css";
 import "../../Styles/navbar.scss";
+import VaccinesIcon from '@mui/icons-material/Vaccines';
 
 const Header = () => {
 	var user = loadStorage("user");
@@ -13,7 +14,13 @@ const Header = () => {
 
 	return (
 		<div className="navbar">
-			<div className="link">
+		<div className="icon">
+			<div><VaccinesIcon style={{ fontSize: 40 , margin: 10}}/></div>
+			<div><p style={{ fontSize: 20 , margin: 10}}>  MedSearch </p></div>
+		
+		
+		</div>
+		<div className="link-container">	<div className="link">
 				<a>
 					<Link to="/" style={{ textDecoration: "none" }}>
 						Home
@@ -50,8 +57,8 @@ const Header = () => {
 					</a>
 				)}
 
-				<div></div>
-			</div>
+			</div></div>
+		
 		</div>
 	);
 };

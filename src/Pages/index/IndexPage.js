@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "../../Styles/cardDesign.scss";
 import "../../Styles/cardDesignHome.scss";
 import axios from "axios";
+import Footer from "../../Components/Footer/Footer";
 
 const Index = () => {
 	const MAT_URL = "http://localhost:3010/static/";
@@ -36,13 +37,14 @@ const Index = () => {
 	return (
 		<div>
 			<Header />
-			<Row style={{ marginTop: 50 }}>
+			<div className="search-design"><Row>
 				<SearchInput
 					placeholder="Search"
 					onChange={(e) => setSearchText(e.target.value)}
 				/>
 				<Button onClick={handleSearch}>Search</Button>
-			</Row>
+			</Row></div>
+			
 
 			{products.length > 0 ? (
 				<div className="product_sec-home">
@@ -65,16 +67,37 @@ const Index = () => {
 										<p> {item.shop.userName}</p>
 										<p> {item.shop.location}</p>
 									</div>
+									
 								</div>
 							);
 						})}
 					</div>
 				</div>
 			) : (
-				<div className="title-2-home">
-					<h1>Your searched items will be appeared here</h1>
+				
+				<div className="gap">
+					
+					<div className="about-home">
+						<p>Activities of MedSearch</p>
+						<div className="about-us">
+							
+							<text> Your searched medicines will be appered here with shop name. </text>
+							<text>You will be able to find out the shop in which your needed medicines are available</text>
+						
+						</div>
+						<div className="last-text">
+							<text>Enjoy to use this website for your convenient</text>
+						</div>
+						
+
+					</div>
 				</div>
+			
+				
+				
 			)}
+
+			<Footer/>
 		</div>
 	);
 };
@@ -92,7 +115,7 @@ const Row = styled.div`
 const SearchInput = styled.input`
 	width: 40%;
 	border-radius: 5px;
-	border: 1px solid #ccc;
+	borde:none;
 	padding: 10px;
 	font-size: 16px;
 	margin-right: 10px;

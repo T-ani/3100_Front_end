@@ -1,7 +1,15 @@
 @import "../Styles/variables.scss";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@300&family=Roboto:wght@500&display=swap');
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@300&display=swap');
 
+.search-design{
+    height: 250px;
+    background: $custom-black;
+    margin-top: 0;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+}
 .card-home{
   
     margin-bottom: 8%;
@@ -50,7 +58,9 @@
     }	
 }
 
-.title-2-home{
+.gap{
+    height: 600px;
+    .title-2-home{
     height: 30%;
     width: 100%;
     display: flex;
@@ -61,5 +71,32 @@
    margin-bottom: 50px;
    
 }
+.about-home{
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+    margin: 40px;
+    p{
+        font-size: 40px;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .about-us{
+        display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;}
+    .last-text{
+        margin: 80px;
+        text{
+            font-family: 'Open Sans', sans-serif;
+            font-size: 25px;
+            font-weight:bolder;
+            color: brown;
+        }
+    }
+}
+}
+
 
 
